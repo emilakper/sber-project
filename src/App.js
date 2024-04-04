@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import { createGlobalStyle } from 'styled-components';
-import { text, background, gradient } from '@salutejs/plasma-tokens';
 import { Button } from '@salutejs/plasma-ui';
 import MaskInput from './components/MaskInput';
 import IpInput from './components/IpInput';
@@ -23,10 +21,6 @@ const App = () => {
   };
 
   const calculateIpInfo = () => {
-    // Ваша логика для расчета информации по IP адресу
-    // Пример: const ipInfo = calculate(ipAddress, subnetMask);
-    // Вернуть результат расчетов
-    // return ipInfo;
     console.log("Calculated!");
     console.log(ipValue);
     console.log(maskValue);
