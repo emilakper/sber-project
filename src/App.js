@@ -1,11 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from '@salutejs/plasma-ui';
 import MaskInput from './components/MaskInput';
 import IpInput from './components/IpInput';
 import InfoTable from './components/InfoTable';
+import { createAssistant, createSmartappDebugger } from '@salutejs/client';
 import './GlobalStyle';
-import { calculateNetworkMask, calculateInverseMask, calculateNetworkAddress, calculateBroadcastAddress, calculateMinHost, calculateMaxHost, calculateNumOfHosts
-, decimalToBinary, decimalToHex } from './components/Calculations';
+import { calculateNetworkMask, calculateInverseMask, calculateNetworkAddress, calculateBroadcastAddress, calculateMinHost, calculateMaxHost, calculateNumOfHosts,
+   decimalToBinary, decimalToHex } from './components/Calculations';
+
+
+
+   const initializeAssistant = (getState/*: any*/) => {
+    if (process.env.NODE_ENV === "development") {
+      return createSmartappDebugger({
+        token: process.env.REACT_APP_TOKEN ?? "",
+        initPhrase: `Запусти ${process.env.REACT_APP_SMARTAPP}`,
+        getState,
+      });
+    }
+    return createAssistant({getState});
+  };
 
 
 const App = () => {
@@ -44,6 +58,27 @@ const App = () => {
     maxHost: '-'
   });
 
+  useEffect(() => {
+    const assistant = initializeAssistant(() => getStateForAssistant());
+    
+    assistant.on('data', (event) => {
+      // Обработка входящих данных от ассистента
+      // ...
+    });
+
+    // Другие обработчики событий ассистента
+
+    return () => {
+      assistant.unmount();
+    };
+  }, []);
+
+  const getStateForAssistant = () => {
+    // Логика для получения состояния приложения для ассистента
+    // Возвращаем состояние для ассистента
+  };
+
+ // code
   function validateIP(ipAddress) {
     const ipParts = ipAddress.split('.');
     if (ipParts.length !== 4) {
