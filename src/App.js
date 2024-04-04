@@ -121,7 +121,7 @@ const App = () => {
         <MaskInput maskValue={maskValue} handleMaskChange={handleMaskChange} />
         <div style={{ marginBottom: '25px' }} />
         <Button
-        text = "Подсчитать"
+        text = "Посчитать"
         onClick={handleCalculate}
         disabled={!isOk}
         />
