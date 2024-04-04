@@ -2,7 +2,7 @@ import React from 'react';
 import { Row, Col } from '@salutejs/plasma-ui';
 import { Filler } from '../GlobalStyle';
 
-const InfoTable = () => {
+const InfoTable = ({info}) => {
   return (
     <div>
       <Row>
@@ -13,57 +13,57 @@ const InfoTable = () => {
         </Row>
         <Row>
           <Col size={2}><Filler>Адрес</Filler></Col>
-          <Col size={1}><Filler>6</Filler></Col>
-          <Col size={1}><Filler>7</Filler></Col>
-          <Col size={1}><Filler>8</Filler></Col>
+          <Col size={1}><Filler>{info.ipAdr}</Filler></Col>
+          <Col size={1}><Filler></Filler></Col>
+          <Col size={1}><Filler></Filler></Col>
         </Row>
         <Row>
-          <Col size={2}><Filler>Маска</Filler></Col>
-          <Col size={1}><Filler>10</Filler></Col>
-          <Col size={1}><Filler>11</Filler></Col>
-          <Col size={1}><Filler>12</Filler></Col>
+          <Col size={2}><Filler>Битовая маска</Filler></Col>
+          <Col size={1}><Filler>{info.maskVal}</Filler></Col>
+          <Col size={1}><Filler>-</Filler></Col>
+          <Col size={1}><Filler>-</Filler></Col>
         </Row>
         <Row>
           <Col size={2}><Filler>Маска сети</Filler></Col>
-          <Col size={1}><Filler>14</Filler></Col>
-          <Col size={1}><Filler>15</Filler></Col>
-          <Col size={1}><Filler>16</Filler></Col>
+          <Col size={1}><Filler>{info.networkMask}</Filler></Col>
+          <Col size={1}><Filler></Filler></Col>
+          <Col size={1}><Filler></Filler></Col>
         </Row>
         <Row>
           <Col size={2}><Filler>Обратная маска</Filler></Col>
-          <Col size={1}><Filler>18</Filler></Col>
-          <Col size={1}><Filler>19</Filler></Col>
-          <Col size={1}><Filler>20</Filler></Col>
+          <Col size={1}><Filler>{info.inverseMask}</Filler></Col>
+          <Col size={1}><Filler></Filler></Col>
+          <Col size={1}><Filler></Filler></Col>
         </Row>
         <Row>
           <Col size={2}><Filler>Адрес сети</Filler></Col>
-          <Col size={1}><Filler>22</Filler></Col>
-          <Col size={1}><Filler>23</Filler></Col>
-          <Col size={1}><Filler>24</Filler></Col>
+          <Col size={1}><Filler>{info.networkAddress}</Filler></Col>
+          <Col size={1}><Filler></Filler></Col>
+          <Col size={1}><Filler></Filler></Col>
         </Row>
         <Row>
           <Col size={2}><Filler>Широковещательный адрес</Filler></Col>
-          <Col size={1}><Filler>26</Filler></Col>
-          <Col size={1}><Filler>27</Filler></Col>
-          <Col size={1}><Filler>28</Filler></Col>
+          <Col size={1}><Filler>{info.broadcastAddress}</Filler></Col>
+          <Col size={1}><Filler></Filler></Col>
+          <Col size={1}><Filler></Filler></Col>
         </Row>
         <Row>
           <Col size={2}><Filler>Минимальный адрес хоста</Filler></Col>
-          <Col size={1}><Filler>30</Filler></Col>
-          <Col size={1}><Filler>31</Filler></Col>
-          <Col size={1}><Filler>32</Filler></Col>
+          <Col size={1}><Filler>{info.minHost}</Filler></Col>
+          <Col size={1}><Filler></Filler></Col>
+          <Col size={1}><Filler></Filler></Col>
         </Row>
         <Row>
           <Col size={2}><Filler>Максимальный адрес хоста</Filler></Col>
-          <Col size={1}><Filler>34</Filler></Col>
-          <Col size={1}><Filler>35</Filler></Col>
-          <Col size={1}><Filler>36</Filler></Col>
+          <Col size={1}><Filler>{info.maxHost}</Filler></Col>
+          <Col size={1}><Filler></Filler></Col>
+          <Col size={1}><Filler></Filler></Col>
         </Row>
         <Row>
           <Col size={2}><Filler>Всего хостов</Filler></Col>
-          <Col size={1}><Filler>38</Filler></Col>
-          <Col size={1}><Filler>39</Filler></Col>
-          <Col size={1}><Filler>40</Filler></Col>
+          <Col size={1}><Filler>{info.numOfHosts}</Filler></Col>
+          <Col size={1}><Filler>-</Filler></Col>
+          <Col size={1}><Filler>-</Filler></Col>
         </Row>
       </div>
   );
