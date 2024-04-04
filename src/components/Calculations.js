@@ -44,3 +44,24 @@ export const calculateNetworkMask = (subnetMask) => {
     return 2 ** (32 - subnetMask) - 2; // Вычисляем количество хостов
   };
   
+  export const decimalToHex = (ipAddress) => {
+    const decimalParts = ipAddress.split('.').map(part => parseInt(part)); // Разбиваем IP-адрес на части и преобразуем их в числа
+  
+    if (decimalParts.length !== 4 || decimalParts.some(part => isNaN(part) || part < 0 || part > 255)) {
+      return 'Некорректный IP-адрес';
+    }
+  
+    const hex = decimalParts.map(part => part.toString(16).padStart(2, '0')).join('.'); // Преобразуем каждую часть в 16-ричный вид
+    return hex;
+  }
+  
+  export const decimalToBinary = (ipAddress) => {
+    const decimalParts = ipAddress.split('.').map(part => parseInt(part)); // Разбиваем IP-адрес на части и преобразуем их в числа
+  
+    if (decimalParts.length !== 4 || decimalParts.some(part => isNaN(part) || part < 0 || part > 255)) {
+      return 'Некорректный IP-адрес';
+    }
+  
+    const binary = decimalParts.map(part => part.toString(2).padStart(8, '0')).join('.'); // Преобразуем каждую часть в двоичный вид
+    return binary;
+  }
