@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button } from '@salutejs/plasma-ui';
+import { Button, TextBox } from '@salutejs/plasma-ui';
 import MaskInput from './components/MaskInput';
 import IpInput from './components/IpInput';
 import InfoTable from './components/InfoTable';
@@ -64,17 +64,14 @@ const App = () => {
     if (action) {
       switch (action.type) {
         case 'add_ip':
-          setIpValue(handleIpChange(action.ip));
+          handleIpChange(action.ip);
           break;
-/*
-        case 'done_note':
-          return this.done_note(action);
 
-        case 'delete_note':
-          return this.delete_note(action);
-*/
-        default:
-          throw new Error();
+        case 'add_mask':
+          handleMaskChange(action.mask);
+
+        case 'calc_ip':
+          handleCalculate();
       }
     }
   };
@@ -83,8 +80,6 @@ const App = () => {
     const assistant = initializeAssistant(() => getStateForAssistant());
     
     assistant.on('data', (event) => {
-      // Обработка входящих данных от ассистента
-      // ...
       console.log(`assistant.on(data)`, event);
       if (event.type === "character") {
         console.log(`assistant.on(data): character: "${event?.character?.id}"`);
@@ -127,6 +122,14 @@ const App = () => {
   };
 
   const handleIpChange = (newValue) => {
+    if (validateIP(newValue) === "success"){
+      setIsOk(true);
+    } else {
+      setIsOk(false);
+    }
+  };
+
+  const handleIpSearch = (newValue) => {
     if (validateIP(newValue) === "success"){
       setIpValue(newValue);
       setIsOk(true);
@@ -180,7 +183,9 @@ const App = () => {
   return (
     <div>
       <div>
-        <IpInput handleIpChange={handleIpChange} isOk={isOk} />
+        <IpInput handleIpChange={handleIpChange} isOk={isOk} handleIpSearch={handleIpSearch} />
+        <div style={{ marginBottom: '25px' }} />
+        <TextBox title={"Введенный адрес: " + ipValue} />
         <div style={{ marginBottom: '25px' }} />
         <MaskInput maskValue={maskValue} handleMaskChange={handleMaskChange} />
         <div style={{ marginBottom: '25px' }} />
