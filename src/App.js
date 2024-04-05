@@ -58,16 +58,44 @@ const App = () => {
     maxHost: '-'
   });
 
+  const dispatchAssistantAction = (action) => {
+    console.log('dispatchAssistantAction', action);
+    
+    if (action) {
+      switch (action.type) {
+        case 'add_ip':
+          setIpValue(handleIpChange(action.ip));
+          break;
+/*
+        case 'done_note':
+          return this.done_note(action);
+
+        case 'delete_note':
+          return this.delete_note(action);
+*/
+        default:
+          throw new Error();
+      }
+    }
+  };
+
   useEffect(() => {
     const assistant = initializeAssistant(() => getStateForAssistant());
     
     assistant.on('data', (event) => {
       // Обработка входящих данных от ассистента
       // ...
+      console.log(`assistant.on(data)`, event);
+      if (event.type === "character") {
+        console.log(`assistant.on(data): character: "${event?.character?.id}"`);
+      } else if (event.type === "insets") {
+        console.log(`assistant.on(data): insets`);
+      } else {
+        const {action} = event;
+        dispatchAssistantAction(action);
+      }
     });
-
-    // Другие обработчики событий ассистента
-
+    
     return () => {
       assistant.unmount();
     };
@@ -77,6 +105,7 @@ const App = () => {
     // Логика для получения состояния приложения для ассистента
     // Возвращаем состояние для ассистента
   };
+  
 
  // code
   function validateIP(ipAddress) {
