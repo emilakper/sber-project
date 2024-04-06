@@ -26,6 +26,7 @@ const App = () => {
   const [ipValue, setIpValue] = useState("0.0.0.0");
   const [maskValue, setMaskValue] = useState(0);
   const [isOk, setIsOk] = useState(false);
+  const [assistantCalc, setAssistantCalc] = useState(false);
   const [info, setInfo] = useState({ 
     ipAdr: '-',
     maskVal: '-',
@@ -58,20 +59,31 @@ const App = () => {
     maxHost: '-'
   });
 
+  useEffect(() => {
+    if (assistantCalc) {
+      handleCalculate(); // Вызов handleCalculate когда приходит соотвествующая команда от ассистента
+    }
+  }, [assistantCalc]);
+
   const dispatchAssistantAction = (action) => {
     console.log('dispatchAssistantAction', action);
     
     if (action) {
       switch (action.type) {
         case 'add_ip':
-          handleIpChange(action.ip);
+          handleIpSearch(action.ip);
           break;
 
         case 'add_mask':
           handleMaskChange(action.mask);
+          break;
 
         case 'calc_ip':
-          handleCalculate();
+          setAssistantCalc(true);
+          break;
+
+        default:
+          throw new Error;
       }
     }
   };
@@ -139,6 +151,7 @@ const App = () => {
   };
 
   const handleCalculate = () => {
+    console.log("Я считаю со значениями " + ipValue + maskValue);
     const networkMask = calculateNetworkMask(maskValue);
     const inverseMask = calculateInverseMask(maskValue);
     const networkAddress = calculateNetworkAddress(ipValue, maskValue);
@@ -185,9 +198,9 @@ const App = () => {
       <div>
         <IpInput handleIpChange={handleIpChange} isOk={isOk} handleIpSearch={handleIpSearch} />
         <div style={{ marginBottom: '25px' }} />
-        <TextBox title={"Введенный адрес: " + ipValue} />
-        <div style={{ marginBottom: '25px' }} />
         <MaskInput maskValue={maskValue} handleMaskChange={handleMaskChange} />
+        <div style={{ marginBottom: '25px' }} />
+        <TextBox title={"Введенный адрес: " + ipValue + "/" + maskValue} />
         <div style={{ marginBottom: '25px' }} />
         <Button
         text = "Посчитать"
