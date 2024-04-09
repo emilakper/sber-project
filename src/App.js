@@ -62,6 +62,7 @@ const App = () => {
   useEffect(() => {
     if (assistantCalc) {
       handleCalculate(); // Вызов handleCalculate когда приходит соотвествующая команда от ассистента
+      setAssistantCalc(false);
     }
   }, [assistantCalc]);
 
