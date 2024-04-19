@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, TextBox } from '@salutejs/plasma-ui';
+import { Button, TextBox, bodyL } from '@salutejs/plasma-ui';
 import MaskInput from './components/MaskInput';
 import IpInput from './components/IpInput';
 import InfoTable from './components/InfoTable';
@@ -7,8 +7,7 @@ import { createAssistant, createSmartappDebugger } from '@salutejs/client';
 import './GlobalStyle';
 import { calculateNetworkMask, calculateInverseMask, calculateNetworkAddress, calculateBroadcastAddress, calculateMinHost, calculateMaxHost, calculateNumOfHosts,
    decimalToBinary, decimalToHex } from './components/Calculations';
-
-
+import "./voiceSber.css";
 
    const initializeAssistant = (getState/*: any*/) => {
     if (process.env.NODE_ENV === "development") {
@@ -197,18 +196,18 @@ const App = () => {
     <div>
       <div>
         <IpInput handleIpChange={handleIpChange} isOk={isOk} handleIpSearch={handleIpSearch} />
-        <div style={{ marginBottom: '25px' }} />
-        <MaskInput maskValue={maskValue} handleMaskChange={handleMaskChange} />
-        <div style={{ marginBottom: '25px' }} />
-        <TextBox title={"Введенный адрес: " + ipValue + "/" + maskValue} />
-        <div style={{ marginBottom: '25px' }} />
+        <div style={{ marginBottom: '15px' }} />
+        <div style={bodyL}><MaskInput maskValue={maskValue} handleMaskChange={handleMaskChange} /> </div>
+        <div style={{ marginBottom: '15px' }} />
+        <input type="text" value={"Введенный адрес: " + ipValue + "/" + maskValue} className="myText"/>
+        <div style={{ marginBottom: '15px' }} />
         <Button
         text = "Посчитать"
         onClick={handleCalculate}
         disabled={!isOk}
         />
       </div>
-      <div style={{ marginBottom: '25px' }} />
+      <div style={{ marginBottom: '15px' }} />
       <InfoTable info={info} info2={info2} info16={info16} />
     </div>
   );

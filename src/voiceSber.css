@@ -1,0 +1,46 @@
+div .SuggestsSuggest {     
+    background-color: rgba(255, 255, 255, 0.12);
+    border: 1px solid transparent;
+    @media (max-height: 900px) {
+        font-size: 1em; 
+    }
+    @media (max-width: 900px) {
+        margin-left: 200px;
+    }
+}
+
+div .Bubble {
+    background-color: rgba(255, 255, 255, 0);
+    padding: 12px 20px;
+    transform: translateX(-25%);
+    top: -10px;
+    font-size: 1.5em;
+    @media (max-height: 900px) {
+        font-size: 1em; 
+        transform: translateY(50%);
+    }
+
+    @media (max-width: 900px) {
+        transform: translateY(50%) translateX(30%);
+    }
+}
+
+div .NativePanel {
+    @media (max-height: 900px) {
+        padding: 36px 64px 6px 
+    }
+}
+
+div .myText {
+    background-color: transparent;
+    color: white;
+    font-size: 1.75em;
+    @media (max-height: 900px) {
+        font-size: 1em; 
+    }
+    border: none; 
+    outline: none; 
+    width: 100%;
+}
+
+

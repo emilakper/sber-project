@@ -5,7 +5,8 @@ const IpInput = ({ handleIpChange, isOk, handleIpSearch }) => {
   return (
     <div>
       <TextField
-        placeholder="Введите IP-адрес и нажмите Enter для подтверждения ввода"
+        size='l'
+        placeholder="Введите IP-адрес и нажмите &quot;Ввод&quot; для подтверждения"
         onChange={({ target: { value } }) => handleIpChange(value)}
         status={isOk ? 'success' : 'error'}
         helperText='Например, 192.168.0.1'

@@ -15,18 +15,34 @@ const DocStyles = createGlobalStyle`
     background-color: ${background};
     background-image: ${gradient};
     min-height: 100vh;
+    font-size: 2em;
   }
 `;
 
+export  const ScrollableGrid = styled.div`
+  overflow-x: auto;
+  overflow-y: auto;
+`;
+
+export const TableGrid = styled.div`
+  display: flex;
+`;
+
 export const Filler = styled.div`
-        box-sizing: border-box;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        padding: 0.5rem 1rem;
-        background-color: rgba(255,255,255,0.06);
-    `;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 0.5rem 1rem;
+    background-color: rgba(255,255,255,0.06);
+    font-size: 1.75em;
+    @media (max-height: 900px) {
+      font-size: 1em; 
+    }
+    white-space: nowrap;
+    overflow-x: auto;
+`;
 
 export const GlobalStyle = () => (
     <>
