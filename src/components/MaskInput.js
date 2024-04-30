@@ -7,6 +7,7 @@ const MaskInput = ({ handleMaskChange, maskValue }) => {
       <div>
         <TextBox
             subTitle='Выберите маску:'
+            style={{ width: '100%' }}
         />
         <Slider 
             value={maskValue}

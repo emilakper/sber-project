@@ -199,7 +199,7 @@ const App = () => {
         <div style={{ marginBottom: '15px' }} />
         <div style={bodyL}><MaskInput maskValue={maskValue} handleMaskChange={handleMaskChange} /> </div>
         <div style={{ marginBottom: '15px' }} />
-        <input type="text" value={"Введенный адрес: " + ipValue + "/" + maskValue} className="myText" tabindex="-1" readonlygit />
+        <div className="myText">Введенный адрес: {ipValue}/{maskValue}</div>
         <div style={{ marginBottom: '15px' }} />
         <Button
         text = "Посчитать"

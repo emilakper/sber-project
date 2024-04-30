@@ -22,6 +22,7 @@ const DocStyles = createGlobalStyle`
 export  const ScrollableGrid = styled.div`
   overflow-x: auto;
   overflow-y: auto;
+  height: 75vh;
 `;
 
 export const TableGrid = styled.div`
@@ -36,7 +37,7 @@ export const Filler = styled.div`
     width: 100%;
     padding: 0.5rem 1rem;
     background-color: rgba(255,255,255,0.06);
-    font-size: 1.75em;
+    font-size: 1.55em;
     @media (max-height: 900px) {
       font-size: 1em; 
     }

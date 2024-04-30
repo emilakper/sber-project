@@ -23,6 +23,8 @@ div .Bubble {
     @media (max-width: 900px) {
         transform: translateY(50%) translateX(30%);
     }
+
+    display: none;
 }
 
 div .NativePanel {
