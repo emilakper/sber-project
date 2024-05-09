@@ -12,7 +12,7 @@ const InfoTable = ({info, info2, info16}) => {
               <thead>
                 <tr>
                   <th><Filler>Имя</Filler></th>
-                  <th><Filler>Значение</Filler></th>
+                  <th><Filler>10-ричный вид</Filler></th>
                   <th><Filler>16-ричный вид</Filler></th>
                   <th><Filler>Бинарный вид</Filler></th>
                 </tr>

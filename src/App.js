@@ -129,8 +129,14 @@ const App = () => {
   }
 
   const handleMaskChange = (newValue) => {
-    setMaskValue(Math.round(newValue));
-  };
+    let newMaskValue = Math.round(newValue);
+    if (newMaskValue < 0) {
+        newMaskValue = 0;
+    } else if (newMaskValue > 32) {
+        newMaskValue = 32;
+    }
+    setMaskValue(newMaskValue);
+};
 
   const handleIpChange = (newValue) => {
     if (validateIP(newValue) === "success"){
