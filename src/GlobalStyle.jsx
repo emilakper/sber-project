@@ -16,6 +16,7 @@ const DocStyles = createGlobalStyle`
     background-image: ${gradient};
     min-height: 100vh;
     font-size: 2em;
+    overflow-x: hidden;
   }
 `;
 

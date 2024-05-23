@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Button, TextBox, bodyL } from '@salutejs/plasma-ui';
+import React, { useState, useEffect, useRef } from 'react';
+import { Button, bodyL } from '@salutejs/plasma-ui';
 import MaskInput from './components/MaskInput';
 import IpInput from './components/IpInput';
 import InfoTable from './components/InfoTable';
@@ -98,7 +98,7 @@ const App = () => {
       } else if (event.type === "insets") {
         console.log(`assistant.on(data): insets`);
       } else {
-        const {action} = event;
+        const action = event?.action;
         dispatchAssistantAction(action);
       }
     });
@@ -150,6 +150,7 @@ const App = () => {
     if (validateIP(newValue) === "success"){
       setIpValue(newValue);
       setIsOk(true);
+      updateInputValue(newValue);
     } else {
       setIsOk(false);
     }
@@ -198,10 +199,18 @@ const App = () => {
     });
   };
 
+  const inputRef = useRef(null);
+  const updateInputValue = (newValue) => {
+    if (inputRef.current) {
+      inputRef.current.value = newValue; 
+    }
+  };
+
   return (
     <div>
       <div>
-        <IpInput handleIpChange={handleIpChange} isOk={isOk} handleIpSearch={handleIpSearch} />
+        <IpInput handleIpChange={handleIpChange} isOk={isOk} newValue={ipValue} ref={inputRef} updateInputValue={updateInputValue} 
+        handleIpSearch={handleIpSearch} />
         <div style={{ marginBottom: '15px' }} />
         <div style={bodyL}><MaskInput maskValue={maskValue} handleMaskChange={handleMaskChange} /> </div>
         <div style={{ marginBottom: '15px' }} />

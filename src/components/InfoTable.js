@@ -1,5 +1,4 @@
 import React from 'react';
-import { Row, Col } from '@salutejs/plasma-ui';
 import { Filler } from '../GlobalStyle';
 import {ScrollableGrid, TableGrid} from '../GlobalStyle';
 

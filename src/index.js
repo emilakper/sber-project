@@ -5,11 +5,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 ReactDOM.render(
-    <DeviceThemeProvider>
+     <DeviceThemeProvider>
         <SSRProvider>
             <App />
             <GlobalStyle />
         </SSRProvider>
-    </DeviceThemeProvider>,
+     </DeviceThemeProvider>,
     document.getElementById('root'),
 );
