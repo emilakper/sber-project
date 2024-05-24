@@ -23,7 +23,7 @@ const DocStyles = createGlobalStyle`
 export  const ScrollableGrid = styled.div`
   overflow-x: auto;
   overflow-y: auto;
-  height: 75vh;
+  height: 90vh;
 `;
 
 export const TableGrid = styled.div`

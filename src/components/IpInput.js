@@ -6,7 +6,7 @@ const IpInput = React.forwardRef(({ handleIpChange, isOk, handleIpSearch, update
     <div>
       <TextField
         size='l'
-        placeholder="Введите IP-адрес и нажмите &quot;Ввод&quot;"
+        placeholder="Введите IP-адрес:"
         onChange={({ target: { value } }) => {
           handleIpChange(value); 
           handleIpSearch(value); 
