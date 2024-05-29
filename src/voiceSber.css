@@ -9,6 +9,10 @@ div .SuggestsSuggest {
     }
 }
 
+.focused {
+    outline: 2px solid blue; 
+}
+
 div .Bubble {
     background-color: rgba(255, 255, 255, 0);
     padding: 12px 20px;

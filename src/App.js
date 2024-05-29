@@ -20,12 +20,40 @@ import "./voiceSber.css";
     return createAssistant({getState});
   };
 
-
 const App = () => {
   const [ipValue, setIpValue] = useState("0.0.0.0");
   const [maskValue, setMaskValue] = useState(0);
   const [isOk, setIsOk] = useState(false);
   const [assistantCalc, setAssistantCalc] = useState(false);
+
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      switch (event.code) {
+        case 'ArrowLeft':
+          event.preventDefault();
+          handleMaskChange(maskValue - 1);
+          break;
+        case 'ArrowRight':
+          event.preventDefault();
+          handleMaskChange(maskValue + 1);
+          break;
+        case 'ArrowDown':
+          event.preventDefault();
+          // window.scrollTo(0, window.scrollY + 50);
+          break;
+        case 'ArrowUp':
+          event.preventDefault();
+          // window.scrollTo(0, window.scrollY - 50);
+          break;
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+
+    // Удаляем обработчик при размонтировании компонента
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [maskValue]); // [maskValue] - массив зависимостей
+
   const [info, setInfo] = useState({ 
     ipAdr: '-',
     maskVal: '-',
@@ -210,9 +238,9 @@ const App = () => {
     <div>
       <div>
         <IpInput handleIpChange={handleIpChange} isOk={isOk} newValue={ipValue} ref={inputRef} updateInputValue={updateInputValue} 
-        handleIpSearch={handleIpSearch} />
+        handleIpSearch={handleIpSearch}/>
         <div style={{ marginBottom: '15px' }} />
-        <div style={bodyL}><MaskInput maskValue={maskValue} handleMaskChange={handleMaskChange} /> </div>
+        <div style={bodyL}><MaskInput maskValue={maskValue} handleMaskChange={handleMaskChange}/> </div>
         <div style={{ marginBottom: '15px' }} />
         <div className="myText">Введенный адрес: {ipValue}/{maskValue}</div>
         <div style={{ marginBottom: '15px' }} />
@@ -226,6 +254,7 @@ const App = () => {
       <InfoTable info={info} info2={info2} info16={info16} />
     </div>
   );
+  
 };
 
 export default App;
