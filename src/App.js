@@ -8,7 +8,7 @@ import './GlobalStyle';
 import { calculateNetworkMask, calculateInverseMask, calculateNetworkAddress, calculateBroadcastAddress, calculateMinHost, calculateMaxHost, calculateNumOfHosts,
    decimalToBinary, decimalToHex } from './components/Calculations';
 import "./voiceSber.css";
-import { useSpatnavInitialization, useSection } from '@salutejs/spatial';
+import { useSpatnavInitialization, useSection, getCurrentFocusedElement } from '@salutejs/spatial';
 
    const initializeAssistant = (getState/*: any*/) => {
     if (process.env.NODE_ENV === "development") {
@@ -29,15 +29,29 @@ const App = () => {
   useSpatnavInitialization();
 
   useEffect(() => {
+    const intervalId = setInterval(() => {
+      const focusedElement = getCurrentFocusedElement();
+      console.log("Focused element:", focusedElement);
+    }, 5000); // 5000 миллисекунд = 5 секунд
+
+    // Очистка интервала при размонтировании компонента
+    return () => clearInterval(intervalId);
+  }, []);
+
+  useEffect(() => {
     const handleKeyDown = (event) => {
       switch (event.code) {
         case 'ArrowLeft':
           event.preventDefault();
-          handleMaskChange(maskValue - 1);
+          if (getCurrentFocusedElement().id  === "my-slider"){
+            handleMaskChange(maskValue - 1);
+          }
           break;
         case 'ArrowRight':
           event.preventDefault();
-          handleMaskChange(maskValue + 1);
+          if (getCurrentFocusedElement().id  === "my-slider"){
+            handleMaskChange(maskValue + 1);
+          }
           break;
         case 'ArrowDown':
           // event.preventDefault();
@@ -236,36 +250,41 @@ const App = () => {
     }
   };
 
-  const ref = useRef(null);
+  const firstElementRef = useRef(null); 
+  const secondElementRef = useRef(null); // Новый ref для второго элемента
+  const thirdElementRef = useRef(null);  // Новый ref для третьего элемента
+  const fourthElementRef = useRef(null);
   const [sectionProps, customize1] = useSection('sectionName');
   useEffect(() => {
-    const focusable = ref.current;
-    if (focusable) {
-        focusable.focus();
+    // Сначала устанавливаем фокус на первый элемент
+    if (firstElementRef.current) {
+      firstElementRef.current.focus();
     }
+
+    // Затем настраиваем секцию 
     customize1({
-      getDefaultElement: (sectionPropsRoot) => sectionPropsRoot.lastElementChild,
+      getDefaultElement: (sectionPropsRoot) => sectionPropsRoot.firstElementChild,
       enterTo: 'default-element',
-  });
-}, [customize1]);
+    });
+  }, [customize1]); 
 
   return (
     <div>
       <div {...sectionProps}>
-        <div ref ={ref} className="sn-section-item" tabIndex={-1}><IpInput handleIpChange={handleIpChange} isOk={isOk} newValue={ipValue} ref={inputRef} updateInputValue={updateInputValue} 
+        <div ref ={firstElementRef} className="sn-section-item" tabIndex={-1}><IpInput handleIpChange={handleIpChange} isOk={isOk} newValue={ipValue} ref={inputRef} updateInputValue={updateInputValue} 
         handleIpSearch={handleIpSearch}/></div>
         <div style={{ marginBottom: '15px' }} />
-        <div ref ={ref} className="sn-section-item" tabIndex={-1} style={bodyL}><MaskInput maskValue={maskValue} handleMaskChange={handleMaskChange}/> </div>
+        <div ref ={secondElementRef} id="my-slider" className="sn-section-item" tabIndex={-1} style={bodyL}><MaskInput maskValue={maskValue} handleMaskChange={handleMaskChange}/> </div>
         <div style={{ marginBottom: '15px' }} />
         <div className="myText">Введенный адрес: {ipValue}/{maskValue}</div>
         <div style={{ marginBottom: '15px' }} />
-        <div ref ={ref} className="sn-section-item" tabIndex={-1} {...sectionProps}><Button
+        <div ref ={thirdElementRef} className="sn-section-item" tabIndex={-1} {...sectionProps}><Button
         text = "Посчитать"
         onClick={handleCalculate}
         disabled={!isOk}
         /></div>
       </div>
-      <div style={{ marginBottom: '15px' }} />
+      <div ref ={fourthElementRef} className="sn-section-item" tabIndex={-1} {...sectionProps} style={{ marginBottom: '15px' }} />
       <InfoTable info={info} info2={info2} info16={info16} />
     </div>
   );
