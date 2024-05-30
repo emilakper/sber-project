@@ -4,6 +4,7 @@ import { TextField } from '@salutejs/plasma-ui';
 const IpInput = React.forwardRef(({ handleIpChange, isOk, handleIpSearch, updateInputValue }, ref) => {
   return (
       <TextField
+        id="text-input-my"
         size='l'
         placeholder="Введите IP-адрес:"
         onChange={({ target: { value } }) => {

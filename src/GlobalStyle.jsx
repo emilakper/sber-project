@@ -28,6 +28,7 @@ export  const ScrollableGrid = styled.div`
 
 export const TableGrid = styled.div`
   display: flex;
+  overflow-x: auto;
 `;
 
 export const Filler = styled.div`
@@ -38,7 +39,7 @@ export const Filler = styled.div`
     width: 100%;
     padding: 0.5rem 1rem;
     background-color: rgba(255,255,255,0.06);
-    font-size: 1.25em;
+    font-size: 1em;
     @media (max-height: 900px) {
       font-size: 1em; 
     }

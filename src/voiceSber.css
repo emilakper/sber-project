@@ -12,10 +12,15 @@ div .SuggestsSuggest {
 .focused {
     outline: 1px solid blue; 
 }*/
+/*
+table.sn-section-item:focus {
+    outline: none;
+  }*/
 
 :focus {
+    outline: none;
     box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.8);
-    border-radius: 8px;
+    border-radius: 12px;
     transition: box-shadow 0.2s ease; /*Плавное появление */
 }
 
