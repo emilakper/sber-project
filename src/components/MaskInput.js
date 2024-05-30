@@ -1,10 +1,11 @@
 import React from 'react';
 import { Slider, TextBox } from '@salutejs/plasma-ui';
-
+import { useSection } from '@salutejs/spatial';
 
 const MaskInput = ({ handleMaskChange, maskValue }) => {
+  const [sectionProps] = useSection('sectionName');
     return (
-      <div>
+      <div {...sectionProps}>
         <TextBox
             subTitle='Выберите маску (0-32):'
             style={{ width: '100%' }}

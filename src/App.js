@@ -8,6 +8,7 @@ import './GlobalStyle';
 import { calculateNetworkMask, calculateInverseMask, calculateNetworkAddress, calculateBroadcastAddress, calculateMinHost, calculateMaxHost, calculateNumOfHosts,
    decimalToBinary, decimalToHex } from './components/Calculations';
 import "./voiceSber.css";
+import { useSpatnavInitialization, useSection } from '@salutejs/spatial';
 
    const initializeAssistant = (getState/*: any*/) => {
     if (process.env.NODE_ENV === "development") {
@@ -25,6 +26,7 @@ const App = () => {
   const [maskValue, setMaskValue] = useState(0);
   const [isOk, setIsOk] = useState(false);
   const [assistantCalc, setAssistantCalc] = useState(false);
+  useSpatnavInitialization();
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -38,11 +40,11 @@ const App = () => {
           handleMaskChange(maskValue + 1);
           break;
         case 'ArrowDown':
-          event.preventDefault();
+          // event.preventDefault();
           // window.scrollTo(0, window.scrollY + 50);
           break;
         case 'ArrowUp':
-          event.preventDefault();
+          // event.preventDefault();
           // window.scrollTo(0, window.scrollY - 50);
           break;
       }
@@ -234,21 +236,34 @@ const App = () => {
     }
   };
 
+  const ref = useRef(null);
+  const [sectionProps, customize1] = useSection('sectionName');
+  useEffect(() => {
+    const focusable = ref.current;
+    if (focusable) {
+        focusable.focus();
+    }
+    customize1({
+      getDefaultElement: (sectionPropsRoot) => sectionPropsRoot.lastElementChild,
+      enterTo: 'default-element',
+  });
+}, [customize1]);
+
   return (
     <div>
-      <div>
-        <IpInput handleIpChange={handleIpChange} isOk={isOk} newValue={ipValue} ref={inputRef} updateInputValue={updateInputValue} 
-        handleIpSearch={handleIpSearch}/>
+      <div {...sectionProps}>
+        <div ref ={ref} className="sn-section-item" tabIndex={-1}><IpInput handleIpChange={handleIpChange} isOk={isOk} newValue={ipValue} ref={inputRef} updateInputValue={updateInputValue} 
+        handleIpSearch={handleIpSearch}/></div>
         <div style={{ marginBottom: '15px' }} />
-        <div style={bodyL}><MaskInput maskValue={maskValue} handleMaskChange={handleMaskChange}/> </div>
+        <div ref ={ref} className="sn-section-item" tabIndex={-1} style={bodyL}><MaskInput maskValue={maskValue} handleMaskChange={handleMaskChange}/> </div>
         <div style={{ marginBottom: '15px' }} />
         <div className="myText">Введенный адрес: {ipValue}/{maskValue}</div>
         <div style={{ marginBottom: '15px' }} />
-        <Button
+        <div ref ={ref} className="sn-section-item" tabIndex={-1} {...sectionProps}><Button
         text = "Посчитать"
         onClick={handleCalculate}
         disabled={!isOk}
-        />
+        /></div>
       </div>
       <div style={{ marginBottom: '15px' }} />
       <InfoTable info={info} info2={info2} info16={info16} />
